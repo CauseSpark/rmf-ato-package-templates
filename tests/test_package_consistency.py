@@ -92,6 +92,17 @@ def test_categorization_matches_across_documents():
     assert f"**Initial SP 800-53B baseline:** {result.baseline}" in worksheet
 
 
+def test_embedded_diagram_matches_source():
+    source = (ROOT / "diagrams" / "rmf_process.mmd").read_text(encoding="utf-8")
+    doc = (ROOT / "docs" / "rmf_steps.md").read_text(encoding="utf-8")
+    embedded = re.search(r"```mermaid\n(.*?)```", doc, re.S).group(1)
+
+    def nodes_and_edges(text):
+        return [line.strip() for line in text.splitlines() if "-->" in line or re.match(r"\s*[A-Z]\[", line)]
+
+    assert nodes_and_edges(embedded) == nodes_and_edges(source)
+
+
 def test_ato_memo_accepted_risks_exist_in_poam(poam):
     _, rows = poam
     poam_ids = {r["poam_id"] for r in rows}

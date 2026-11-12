@@ -17,7 +17,23 @@ Rev. 2 has **seven steps**. It added *Prepare* in front of the six steps from Re
 go in order the first time through, but the RMF is a loop: monitoring results feed back into
 earlier steps, and a significant change to the system can send you back to Categorize or Select.
 
-The diagram is in [`../diagrams/rmf_process.mmd`](../diagrams/rmf_process.mmd).
+The source for this diagram is [`../diagrams/rmf_process.mmd`](../diagrams/rmf_process.mmd).
+
+```mermaid
+flowchart LR
+    P["1. Prepare<br/><i>roles, risk strategy,<br/>boundary, common controls</i>"]
+    C["2. Categorize<br/><i>FIPS 199 worksheet,<br/>high-water mark</i>"]
+    S["3. Select<br/><i>tailored 800-53B baseline,<br/>draft SSP</i>"]
+    I["4. Implement<br/><i>configured system,<br/>SSP implementation statements</i>"]
+    A["5. Assess<br/><i>SAP, SAR,<br/>initial POA&M</i>"]
+    R["6. Authorize<br/><i>risk determination,<br/>ATO memo</i>"]
+    M["7. Monitor<br/><i>ConMon reports,<br/>POA&M updates</i>"]
+
+    P --> C --> S --> I --> A --> R --> M
+    M -- "routine: reassess subset,<br/>update POA&M" --> A
+    M -- "significant change" --> C
+    M -- "risk posture changes" --> R
+```
 
 ---
 
