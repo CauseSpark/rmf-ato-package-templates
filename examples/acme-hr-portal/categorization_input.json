@@ -1,0 +1,42 @@
+{
+  "system_name": "Acme HR Portal",
+  "organization": "Acme Defense Fabrication (fictional)",
+  "notes": "Fictional study scenario. Impact values are the author's own adjusted judgments, informed by the approach in NIST SP 800-60; they are not copied from it.",
+  "information_types": [
+    {
+      "name": "Employee personnel records",
+      "confidentiality": "moderate",
+      "integrity": "moderate",
+      "availability": "low",
+      "rationale": "Names, home addresses, SSNs, and performance records. Disclosure could enable identity theft and harm employees (C=M). Unauthorized changes could affect employment decisions (I=M). A multi-day outage is an inconvenience; HR can work from exports (A=L)."
+    },
+    {
+      "name": "Payroll and compensation",
+      "confidentiality": "moderate",
+      "integrity": "moderate",
+      "availability": "low",
+      "rationale": "Salary and direct-deposit details. Tampering could redirect pay (I=M). Payroll processing itself runs in a separate provider system, so portal downtime delays viewing, not payment (A=L)."
+    },
+    {
+      "name": "Benefits enrollment",
+      "confidentiality": "moderate",
+      "integrity": "low",
+      "availability": "low",
+      "rationale": "Dependent and plan election data. Elections are confirmed with the carrier before taking effect, which limits integrity impact (I=L)."
+    },
+    {
+      "name": "Public job postings",
+      "confidentiality": "not applicable",
+      "integrity": "low",
+      "availability": "low",
+      "rationale": "Already published on the public careers site, so confidentiality is not applicable. Defacement would be embarrassing but limited (I=L)."
+    },
+    {
+      "name": "Authentication and audit records",
+      "confidentiality": "moderate",
+      "integrity": "moderate",
+      "availability": "low",
+      "rationale": "Account attributes and audit logs. Disclosure aids an attacker (C=M); tampering would hide misuse (I=M)."
+    }
+  ]
+}
