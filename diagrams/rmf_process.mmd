@@ -1,0 +1,18 @@
+%% NIST RMF (SP 800-37 Rev. 2): seven steps with typical outputs.
+%% Personal study diagram; not an official NIST figure.
+flowchart LR
+    P["1. Prepare<br/><i>roles, risk strategy,<br/>boundary, common controls</i>"]
+    C["2. Categorize<br/><i>FIPS 199 worksheet,<br/>high-water mark</i>"]
+    S["3. Select<br/><i>tailored 800-53B baseline,<br/>draft SSP</i>"]
+    I["4. Implement<br/><i>configured system,<br/>SSP implementation statements</i>"]
+    A["5. Assess<br/><i>SAP, SAR,<br/>initial POA&M</i>"]
+    R["6. Authorize<br/><i>risk determination,<br/>ATO memo</i>"]
+    M["7. Monitor<br/><i>ConMon reports,<br/>POA&M updates</i>"]
+
+    P --> C --> S --> I --> A --> R --> M
+    M -- "routine: reassess subset,<br/>update POA&M" --> A
+    M -- "significant change" --> C
+    M -- "risk posture changes" --> R
+
+    classDef step fill:#eef3fb,stroke:#2f5597,color:#1a1a1a;
+    class P,C,S,I,A,R,M step;
