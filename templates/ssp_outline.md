@@ -1,7 +1,8 @@
 # System Security Plan (SSP): Outline
 
 > Template, personal study material. This is my own outline for a readable SSP, loosely
-> informed by [SP 800-18 Rev. 1](https://csrc.nist.gov/pubs/sp/800/18/r1/final) and the RMF
+> informed by [SP 800-18 Rev. 2](https://csrc.nist.gov/pubs/sp/800/18/r2/final) (June 2026,
+> which superseded Rev. 1 and now also covers privacy and C-SCRM plans) and the RMF
 > Select and Implement steps in [SP 800-37 Rev. 2](https://csrc.nist.gov/pubs/sp/800/37/r2/final).
 > Control IDs refer to [SP 800-53 Rev. 5](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final).
 > Real SSPs often live in a GRC tool or in OSCAL format; this outline shows the content they need.
