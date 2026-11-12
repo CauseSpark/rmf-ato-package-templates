@@ -1,0 +1,2 @@
+poam_id,finding_id,control,weakness,source,risk_rating,original_detection_date,scheduled_completion_date,milestones,resources_required,point_of_contact,status,status_date,comments
+POAM-0001,<SYS-YYYY-###>,<AC-2(3)>,<Short description of the weakness>,<SAR / scan / ConMon / incident>,<Low|Moderate|High>,<YYYY-MM-DD>,<YYYY-MM-DD>,<M1 YYYY-MM-DD: step; M2 YYYY-MM-DD: step>,<labor / funding / tools>,<role or name>,<Open|In Progress|Risk Accepted|Completed>,<YYYY-MM-DD>,<notes; deviation or risk acceptance reference>
