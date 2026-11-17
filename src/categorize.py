@@ -58,15 +58,10 @@ class Impact(IntEnum):
             raise ValueError(f"impact must be a string, got {type(value).__name__}")
         key = value.strip().upper().replace("/", "").replace("-", "_").replace(" ", "_")
         aliases = {
-            "L": cls.LOW,
-            "LOW": cls.LOW,
-            "M": cls.MODERATE,
-            "MOD": cls.MODERATE,
-            "MODERATE": cls.MODERATE,
-            "H": cls.HIGH,
-            "HIGH": cls.HIGH,
-            "NA": cls.NOT_APPLICABLE,
-            "NOT_APPLICABLE": cls.NOT_APPLICABLE,
+            "L": cls.LOW, "LOW": cls.LOW,
+            "M": cls.MODERATE, "MOD": cls.MODERATE, "MODERATE": cls.MODERATE,
+            "H": cls.HIGH, "HIGH": cls.HIGH,
+            "NA": cls.NOT_APPLICABLE, "NOT_APPLICABLE": cls.NOT_APPLICABLE,
         }
         if key not in aliases:
             raise ValueError(f"unknown impact level: {value!r}")
@@ -135,23 +130,20 @@ class SystemCategorization:
     def to_dict(self) -> dict:
         return {
             "system_name": self.system_name,
-            "confidentiality": self.confidentiality.label,
-            "integrity": self.integrity.label,
-            "availability": self.availability.label,
+            **_labels(self),
             "overall": self.overall.label,
             "baseline": self.baseline,
             "security_category": self.security_category(),
             "information_types": [
-                {
-                    "name": t.name,
-                    "confidentiality": t.confidentiality.label,
-                    "integrity": t.integrity.label,
-                    "availability": t.availability.label,
-                    "security_category": t.security_category(),
-                }
+                {"name": t.name, **_labels(t), "security_category": t.security_category()}
                 for t in self.information_types
             ],
         }
+
+
+def _labels(item: "InformationType | SystemCategorization") -> dict[str, str]:
+    """The impact label for each security objective, in C-I-A order."""
+    return {objective: getattr(item, objective).label for objective in OBJECTIVES}
 
 
 def _sc_string(name: str, c: Impact, i: Impact, a: Impact) -> str:
@@ -189,13 +181,7 @@ def load_input(path: "str | Path") -> SystemCategorization:
     data = json.loads(Path(path).read_text(encoding="utf-8"))
     try:
         types = [
-            InformationType(
-                name=item["name"],
-                confidentiality=item["confidentiality"],
-                integrity=item["integrity"],
-                availability=item["availability"],
-                rationale=item.get("rationale", ""),
-            )
+            InformationType(item["name"], *(item[objective] for objective in OBJECTIVES), item.get("rationale", ""))
             for item in data["information_types"]
         ]
         return categorize_system(data["system_name"], types)
